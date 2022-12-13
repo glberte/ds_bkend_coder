@@ -1,4 +1,3 @@
-/classes
-practica.js/
-#.DS_store
-#node_modules
+/clase3/classes/
+.DS_store
+node_modules

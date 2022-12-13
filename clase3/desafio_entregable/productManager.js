@@ -1,26 +1,68 @@
-class ProductManager{
+
+class ProductManager {
+
     constructor(){
-        this.productos = [];
+        this.products = []
+        }
+    
+        getProducts(){
+            return this.products;
+        }
+    
+        addProduct(title, description, price, code, guid = 0, thumbnail, stock){
+            let product = {
+                title,
+                description,
+                price,
+                code,
+                guid: guid || 0,
+                thumbnail,
+                stock
+                };
+    
+            const found = this.products.some(item => item.code === product.code)
+            
+            if (!found){
+                console.log("Se agrego el producto!")
+            }else{
+                console.log("Error, el código ingresado se encuentra repetido")
+                
+            }
+    
+            if (this.products.length === 0){
+                product["guid"] = 1;
+            }else{
+                product["guid"] = this.products[this.products.length - 1]["guid"] + 1;
+            }
+    
+            this.products.push(product)
+    
+        }
+    
+        getProductById(guid){
+            let product = this.products.filter((item) => item.guid === guid);
+            if (product.length > 0){
+                console.log(product)
+                return product
+            }else{
+                console.log(`No se encuentra ningun articulo con el ID ingresado (Not found)`);
+                return
+            }
+        }
     }
-
-    addProduct(producto){
-        if(!this.productos){
-            this.productos = [producto]
-        } else {
-            this.productos.push(producto);
-        };
-    }
-    getProducts(){
-        return console.log(this.productos);
-    }
-
-}
-
-
-const alimentosDog = new ProductManager();
-alimentosDog.addProduct({nombre:'naranja', precio:1.25});
-alimentosDog.addProduct({nombre:'limon', precio:1.75});
-alimentosDog.addProduct({nombre:'limon', precio:1.75});
-//console.log(alimentosDog);
-
-alimentosDog.getProducts();
+    
+    //** CARGA DE ARTICULOS Y LLAMADA DE METODOS **//
+    
+    const productos = new ProductManager();
+    
+    productos.addProduct("Fawna Cachorros","10 kg",5000,"codigo1",0,"Imagen",10);
+    productos.addProduct("Fawna Medianos","10 kg",7000,"codigo2",0,"Imagen",10);
+    productos.addProduct("Fawna Adultos","10 kg",9000,"codigo3",0,"Imagen",10);
+    
+    // Intengamos agregar un producto con el mismo CODE de otro
+    productos.addProduct("Doggi Adultos","10 kg",9000,"codigo3",0,"Imagen",10);
+    
+    
+    //console.log(products.getProductos());
+    
+    productos.getProductById(0);
