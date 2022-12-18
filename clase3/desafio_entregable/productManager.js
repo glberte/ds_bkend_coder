@@ -2,7 +2,7 @@
 class ProductManager {
 
     constructor(){
-        this.products = []
+        this.products = [];
         }
     
         getProducts(){
@@ -65,7 +65,7 @@ class ProductManager {
     const productos = new ProductManager();
     
      productos.addProduct("Fawna Cachorros","10 kg",5000,"codigo1",0,"Imagen",10);
-    // productos.addProduct("Fawna Medianos","10 kg",7000,"codigo2",0,"Imagen",10);
+     productos.addProduct("Fawna Medianos","10 kg",7000,"codigo2",0,"Imagen",10);
     // productos.addProduct("Fawna Adultos","10 kg",9000,"codigo3",0,"Imagen",10);
     
     // Intengamos agregar un producto con el mismo CODE de otro
@@ -73,6 +73,6 @@ class ProductManager {
     productos.addProduct("","",9000,"codigo4",0,"Imagen",10);
     
     
-    //console.log(products.getProductos());
+    //console.log(productos.getProducts());
     
-    //productos.getProductById(0);
+    productos.getProductById(2);
