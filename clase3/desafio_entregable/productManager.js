@@ -20,16 +20,17 @@ class ProductManager {
                 stock
                 };
     
+
+                for (var i = 0; i < arguments.length; i++){
+                    // Comprobamos si hay campos vacios
+                    if (arguments[i] === "") {
+                        console.log("No puede haber campos vacios, complete todos los datos");
+                        return;
+                    }
+                }
+
             const found = this.products.some(item => item.code === product.code)
             
-            for (const key in product){
-                // comprobar si hay un campo vacio
-                if (product[key] == ""){
-                    console.log("No puede haber campos vacios, complete todos los datos");
-                    return;
-                }
-            }
-
             if (!found){
                 console.log("Se agrego el producto!")
             }else{
@@ -63,7 +64,7 @@ class ProductManager {
     
     const productos = new ProductManager();
     
-    // productos.addProduct("Fawna Cachorros","10 kg",5000,"codigo1",0,"Imagen",10);
+     productos.addProduct("Fawna Cachorros","10 kg",5000,"codigo1",0,"Imagen",10);
     // productos.addProduct("Fawna Medianos","10 kg",7000,"codigo2",0,"Imagen",10);
     // productos.addProduct("Fawna Adultos","10 kg",9000,"codigo3",0,"Imagen",10);
     
