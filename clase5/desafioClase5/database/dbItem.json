@@ -1,0 +1,20 @@
+[  {
+    "id": 1,
+    "title": "Fawna Cachorros",
+    "description": "Descripción del producto 1",
+    "price": 5000,
+    "thumbnail": "/imagenes/producto1.jpg",
+    "code": "codigo1",
+    "stock": 10  
+    },
+    
+    {    
+    "id": 2,
+    "title": "Fawna Medianos",
+    "description": "Descripción del producto 2",
+    "price": 7000,
+    "thumbnail": "/imagenes/producto2.jpg",
+    "code": "codigo2",
+    "stock": 5  
+    }
+]
