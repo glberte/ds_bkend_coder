@@ -4,7 +4,7 @@ const path = require('path');
 class ProductManager {
   constructor() {
     this.products = []
-    this.path = "./database/dbItem.json"
+    this.path = "./clase5/desafioClase5/database/dbItem.json"
       if(fs.existsSync(this.path)) {
         this.products = JSON.parse(fs.readFileSync(this.path, "utf-8"))
       } else{
@@ -33,7 +33,8 @@ class ProductManager {
   async getProducts() {
     // Leer el archivo de productos y parsear su contenido a un array de objetos
     //let products = JSON.parse(fs.readFileSync(this.path));
-    return this.products;
+    let products = JSON.parse(fs.readFileSync(this.path));
+    return products;
   }
 
   // async getProductById(id) {
