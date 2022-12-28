@@ -58,14 +58,20 @@ class ProductManager {
     return products;
   }
 
-  // async getProductById(id) {
-  //   // Leer el archivo de productos
-  //   let products = await this.getProducts();
+   async getProductById(id) {
+     // Leer el archivo de productos
+     let products = await this.getProducts();
+     
+     // Verificamos que el id sea un nº 
+     id = parseInt(id);
+     if (isNaN(id)) {
+      throw new Error("El ID debe ser un número entero");
+    }
 
-  //   // Buscar el producto con el id especificado
-  //   let product = products.find(p => p.id === id);
-  //   return product;
-  // }
+     // Buscar el producto con el id especificado
+     let product = products.find(p => p.id === id);
+     return product;
+   }
 
   // async updateProduct(id, product) {
   //   // Leer el archivo de productos
@@ -81,33 +87,47 @@ class ProductManager {
   //   fs.writeFileSync(this.path, JSON.stringify(products));
   // }
 
-  // async deleteProduct(id) {
-  //   // Leer el archivo de productos
-  //   let products = await this.getProducts();
+   async deleteProduct(id) {
+     // Leer el archivo de productos    
+     let products = await this.getProducts()    
+     
+     // Filtramos productos para eliminar el producto del id 
+     let filtered = products.filter(p => p.id !== id);
 
-  //   // Filtrar el array de productos para eliminar el producto con el id especificado
-  //   let filtered = products.filter(p => p.id !== id);
-
-  //   // Guardar el array filtrado en el archivo
-  //   fs.writeFileSync(this.path, JSON.stringify(filtered));
-  // }
+     // Guardamos el array en el archivo
+     fs.writeFileSync(this.path, JSON.stringify(filtered));
+     console.log("Se elimino el producto!")
+   }
 }
 
-
+//** GENERAMOS EL NUEVO OBJETO CON EL CONSTRUCTOR */
 const productos = new ProductManager();
+
+// CARGAMOS UN NUEVO PRODUCTO CON LOS PARAMETROS OBLIGATORIOS
 //productos.addProduct("Fawna Medianos","10 kg",7000,"codigo4","Imagen",10);
 
-// se intenta agregar un producto con un campo vacio
+// Intentamos agregar un productos con campos vacios
 //productos.addProduct("","10 kg",9000,"codigo3","Imagen",10);
-productos.addProduct("Pedigree Cachorro","10 kg",9000,"codigo3","Imagen",10);
-console.log(productos.getProducts());
-//console.log(productos.getNextID(productos));
+//productos.addProduct("","",9000,"codigo4",0,"Imagen",10);
 
+// AGREGAMOS UN NUEVO PRODUCTO GENERANDO EL ID UNICO Y CONSECUTIVO
+productos.addProduct("Pedigree Cachorro","10 kg",9000,"codigo3","Imagen",10);
+
+
+//console.log(productos.getProducts());
+//console.log(productos.getProductById(2));
+
+// Buscamos un producto y verificamos que si o si sea un nº
+//  productos.getProductById(2)
+//    .then(product => console.log(product))
+//    .catch(error => console.error(error));
 
 // Intengamos agregar un producto con el mismo CODE de otro
 //productos.addProduct("Doggi Adultos","10 kg",9000,"codigo3",0,"Imagen",10);
-//productos.addProduct("","",9000,"codigo4",0,"Imagen",10);
 
+// Eliminamos un producto del archivo
+productos.deleteProduct(2)
+console.log(productos.getProducts());
 
 
 
