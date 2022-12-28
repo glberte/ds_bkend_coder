@@ -11,37 +11,47 @@ class ProductManager {
         this.products = []
       }
   }
-  getNextID = (productList) => {
-    const count = productList.length;
-    return (count > 0) ? productList[count-1].id +1 : 1
+
+  addProduct(title, description, price, code, thumbnail, stock) {
+    let product = {
+        title,
+        description,
+        price,
+        code,
+        thumbnail,
+        stock
+        };
+  
+    for (var i = 0; i < arguments.length; i++){
+        // Comprobamos si hay campos vacios
+        if (arguments[i] === "") {
+            console.log("No puede haber campos vacios, complete todos los datos");
+            return;
+        }
+    }
+  
+    // Leemos todos los productos del archivo JSON
+    this.products = JSON.parse(fs.readFileSync(this.path, "utf-8"));
+  
+    // Se asigna un id autoincrementable al producto
+    if (this.products.length === 0) {
+      product.id = 1;
+    } else {
+      product.id = this.products[this.products.length - 1].id + 1;
+    }
+  
+    // Buscamos el codigo si no existe, agregar el producto al final de la lista de productos y escribir el archivo JSON
+    const found = this.products.some(item => item.code === product.code)
+
+    if (!found){
+      this.products.push(product);
+      fs.writeFileSync(this.path, JSON.stringify(this.products));
+      console.log("Se agrego el producto!")
+    }else{
+      console.log("Error, el código ingresado se encuentra repetido")
+    }
   }
-
-
-  addProduct = async (product) => {
-    const productList = await this.getProducts();
-    product.id = this.getNextID(productList)
-
-    const codeExist = productList.find((p)=> p.code === product.code)
-    console.log(productList);
-  }
-
-  //  async addProduct(product) {
-  //    // Leer el archivo de productos
-  //    let products = await this.getProducts();
-
-  //   //  // Asignar un id autoincrementable al producto
-  //     if (products.length === 0) {
-  //       product.id = 1;
-  //     } else {
-  //       product.id = products[products.length - 1].id + 1;
-  //      }
-  //     // Añadir el producto al array de productos
-  //     products.push(product);
-
-  //   //  // Guardar el array de productos en el archivo
-  //     fs.writeFileSync(this.path, JSON.stringify(products));
-  //    console.log(product);
-  //  }
+  
 
   async getProducts() {
     // Leer el archivo de productos y parsear su contenido a un array de objetos
@@ -86,9 +96,14 @@ class ProductManager {
 
 
 const productos = new ProductManager();
-//productos.addProduct("Fawna Medianos","10 kg",7000,"codigo4",0,"Imagen",10);
-productos.addProduct(1,"Fawna Adultos","10 kg",9000,"codigo3",0,"Imagen",10);
+//productos.addProduct("Fawna Medianos","10 kg",7000,"codigo4","Imagen",10);
+
+// se intenta agregar un producto con un campo vacio
+//productos.addProduct("","10 kg",9000,"codigo3","Imagen",10);
+productos.addProduct("Pedigree Cachorro","10 kg",9000,"codigo3","Imagen",10);
 console.log(productos.getProducts());
+//console.log(productos.getNextID(productos));
+
 
 // Intengamos agregar un producto con el mismo CODE de otro
 //productos.addProduct("Doggi Adultos","10 kg",9000,"codigo3",0,"Imagen",10);
