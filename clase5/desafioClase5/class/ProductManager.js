@@ -53,13 +53,13 @@ class ProductManager {
   }
   
   async getProducts() {
-    // Leer el archivo de productos y parsear su contenido a un array de objetos
+    // Leemos el archivo de productos y parseamos su contenido a un array de objetos
     let products = JSON.parse(fs.readFileSync(this.path));
     return products;
   }
 
    async getProductById(id) {
-     // Leer el archivo de productos
+     // Leemos el archivo de productos
      let products = await this.getProducts();
      
      // Verificamos que el id sea un nº 
@@ -73,19 +73,20 @@ class ProductManager {
      return product;
    }
 
-  // async updateProduct(id, product) {
-  //   // Leer el archivo de productos
-  //   let products = await this.getProducts();
+   async updateProduct(id, product) {
+     // Leemos el JSON
+     let products = await this.getProducts();
 
-  //   // Buscar el índice del producto con el id especificado
-  //   let index = products.findIndex(p => p.id === id);
+     // Buscamos el producto por el índice con el id
+     let index = products.findIndex(p => p.id === id);
 
-  //   // Actualizar el producto en el array de productos
-  //   products[index] = product;
+     // Actualizamos el producto en el array de productos
+     products[index] = product;
 
-  //   // Guardar el array de productos en el archivo
-  //   fs.writeFileSync(this.path, JSON.stringify(products));
-  // }
+     // Escribimos y guardamos el array de productos en el archivo JSON
+     fs.writeFileSync(this.path, JSON.stringify(products));
+     console.log("Se ha actualizado el producto")
+   }
 
    async deleteProduct(id) {
      // Leer el archivo de productos    
@@ -100,7 +101,8 @@ class ProductManager {
    }
 }
 
-//** GENERAMOS EL NUEVO OBJETO CON EL CONSTRUCTOR */
+////////////------------------------------------------///////////
+// GENERAMOS EL NUEVO OBJETO CON EL CONSTRUCTOR
 const productos = new ProductManager();
 
 // CARGAMOS UN NUEVO PRODUCTO CON LOS PARAMETROS OBLIGATORIOS
@@ -113,20 +115,30 @@ const productos = new ProductManager();
 // AGREGAMOS UN NUEVO PRODUCTO GENERANDO EL ID UNICO Y CONSECUTIVO
 productos.addProduct("Pedigree Cachorro","10 kg",9000,"codigo3","Imagen",10);
 
-
 //console.log(productos.getProducts());
 //console.log(productos.getProductById(2));
 
-// Buscamos un producto y verificamos que si o si sea un nº
+// BUSCAMOS EL PRODUCTO POR ID
 //  productos.getProductById(2)
 //    .then(product => console.log(product))
 //    .catch(error => console.error(error));
 
-// Intengamos agregar un producto con el mismo CODE de otro
+// Probamos agregar un producto con el mismo CODE de otro
 //productos.addProduct("Doggi Adultos","10 kg",9000,"codigo3",0,"Imagen",10);
 
-// Eliminamos un producto del archivo
-productos.deleteProduct(2)
+// ELIMINAMOS UN PRODUCTO DEL ARCHIVO POR EL ID 
+//productos.deleteProduct(2)
+
+// BUSCAMOS UN PRODUCTO Y LO ACTUALIZAMOS
+ productos.updateProduct(2, {
+  title: "Probando",
+  description:"10 kg",
+  price: 5000,
+  code:"codigo3",
+  thumbnail:"/imagenes/producto3.jpg", 
+  stock: 10
+});
+
 console.log(productos.getProducts());
 
 
