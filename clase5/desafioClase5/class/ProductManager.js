@@ -52,7 +52,6 @@ class ProductManager {
     }
   }
   
-
   async getProducts() {
     // Leer el archivo de productos y parsear su contenido a un array de objetos
     let products = JSON.parse(fs.readFileSync(this.path));
