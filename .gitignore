@@ -1,6 +1,7 @@
 /clase3/classes/
 /clase4
 /clase5/enClase
-/clase6
+/clase6/ejercicioClase
 .DS_store
 node_modules
+package-lock.json

@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/glberte/ds_bkend_coder/issues"
   },
-  "homepage": "https://github.com/glberte/ds_bkend_coder#readme"
+  "homepage": "https://github.com/glberte/ds_bkend_coder#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
