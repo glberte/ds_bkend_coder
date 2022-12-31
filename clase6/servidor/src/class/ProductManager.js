@@ -4,7 +4,7 @@ const path = require('path');
 class ProductManager {
   constructor() {
     this.products = []
-    this.path = "./products.json"
+    this.path = "./src/data/products.json"
       if(fs.existsSync(this.path)) {
         this.products = JSON.parse(fs.readFileSync(this.path, "utf-8"))
       } else{
@@ -113,7 +113,7 @@ const productos = new ProductManager();
 //productos.addProduct("","",9000,"codigo4",0,"Imagen",10);
 
 // AGREGAMOS UN NUEVO PRODUCTO GENERANDO EL ID UNICO Y CONSECUTIVO
-productos.addProduct("Pedigree Cachorro","10 kg",9000,"codigo3","Imagen",10);
+//productos.addProduct("Pedigree Cachorro","10 kg",9000,"codigo3","Imagen",10);
 
 //console.log(productos.getProducts());
 //console.log(productos.getProductById(2));
@@ -130,16 +130,16 @@ productos.addProduct("Pedigree Cachorro","10 kg",9000,"codigo3","Imagen",10);
 //productos.deleteProduct(2)
 
 // BUSCAMOS UN PRODUCTO Y LO ACTUALIZAMOS
- productos.updateProduct(2, {
-  title: "Probando",
-  description:"10 kg",
-  price: 5000,
-  code:"codigo3",
-  thumbnail:"/imagenes/producto3.jpg", 
-  stock: 10
-});
+//  productos.updateProduct(2, {
+//   title: "Probando",
+//   description:"10 kg",
+//   price: 5000,
+//   code:"codigo3",
+//   thumbnail:"/imagenes/producto3.jpg", 
+//   stock: 10
+// });
 
-console.log(productos.getProducts());
+//console.log(productos.getProducts());
 
 
 
