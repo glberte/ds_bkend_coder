@@ -4,7 +4,7 @@ const path = require('path');
 class ProductManager {
   constructor() {
     this.products = []
-    this.path = "./clase6/servidor/src/data/products.json"
+    this.path = "./products.json"
       if(fs.existsSync(this.path)) {
         this.products = JSON.parse(fs.readFileSync(this.path, "utf-8"))
       } else{
