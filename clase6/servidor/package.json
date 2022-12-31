@@ -1,0 +1,11 @@
+{
+  "name": "desafioclase6",
+  "version": "1.0.0",
+  "description": "servidor con framework express para ejercicio de coderhouse",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gabriel Bertellotti",
+  "license": "ISC"
+}
