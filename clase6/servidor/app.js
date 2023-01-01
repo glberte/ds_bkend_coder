@@ -1,8 +1,11 @@
 const express = require('express');
-const app = express();
-const ProductManager = require('./src/class/ProductManager');
+const {productos} = require('./src/class/ProductManager');
 
-// Seteamos el servidor
+// Inicializamos el servidor
+const app = express();
+// Levantamos el servidor en un puerto
+app.listen(3000);
+
 
 // ENDPOINTS 
 app.get("/", function (req, res){
@@ -10,10 +13,28 @@ app.get("/", function (req, res){
 });
 
 // Endpoint consulta de productos con limit
-app.get('/products', async (req, res) => {
-  let products = ProductManager.getProducts()
-  res.products(products);
+app.get('/products', (req, res) => {
+  let products = productos.getProducts();
+  const limit = req.query.limit;
+  if(limit && !isNaN(Number(limit))){
+    const limitNumber = Number(limit);
+    if (limitNumber > 0 && limitNumber <= productos.length) {
+      products = productos.slice(0, limit);
+    } else {
+      console.log('No hay tantos productos disponibles')
+    }
+  }
+  res.send(products);
 });
+
+
+
+
+
+
+
+
+
 
 // Endpoint consultando usuario
 app.get('/usuario', (req, res) => {
@@ -24,9 +45,12 @@ app.get('/usuario', (req, res) => {
   res.send(respuesta);
 } )
 
+// app.get('/items/:code', (req, res)=> {
+//   const item = [];
+//   res.send(item);
+// })
 
-// Levantamos el servidor
-app.listen(3000);
+
 
 
 

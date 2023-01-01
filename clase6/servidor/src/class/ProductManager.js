@@ -139,8 +139,11 @@ const productos = new ProductManager();
 //   stock: 10
 // });
 
-//console.log(productos.getProducts());
+console.log(productos.getProducts());
 
 
 
-module.exports = ProductManager;
+module.exports = {
+  productos
+};
+//export default new ProductManager();
