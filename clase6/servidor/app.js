@@ -25,8 +25,8 @@ app.get("/", function (req, res){
      const limitNumber = Number(limit);
      if (limitNumber > 0 && limitNumber <= productos.length) {
        products = productos.slice(0, limit);
-     } else {
-       console.log('No hay tantos productos disponibles')
+      } else {
+        console.log('No hay tantos productos disponibles')
      }
    }
    //res.send(products);
