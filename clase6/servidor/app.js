@@ -18,13 +18,13 @@ app.get("/", function (req, res){
 });
 
 // Consulta de productos con limit probamos send y json
- app.get('/products', (req, res) => {
-   let products = productos.getProducts();
+ app.get('/products', async (req, res) => {
+   const products = productos.getProducts();
    const limit = req.query.limit;
    if(limit && !isNaN(Number(limit))){
      const limitNumber = Number(limit);
      if (limitNumber > 0 && limitNumber <= productos.length) {
-       products = productos.slice(0, limit);
+       products = await productos.slice(0, limit);
       } else {
         console.log('No hay tantos productos disponibles')
      }
@@ -37,10 +37,10 @@ app.get("/", function (req, res){
 
 
 // Api de consulta por ID, debe ser un nº entero
-app.get('/products/:code', (req, res) =>{
-  const productID = req.query.code;
+app.get('/products/:code', async (req, res) =>{
+  const productID = req.params.code;
   //console.log(productID);
-  const product = productos.getProductById(productID);
+  const product = await productos.getProductById(productID);
   
   res.send(product);
 })
