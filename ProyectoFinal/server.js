@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const { cartRouter } = require('./src/routes/cartRoute');
 const productRouter = require('./src/routes/productRoutes');
 //const {productRoutes} = require('./src/routes/productRoutes');
 
@@ -19,6 +20,7 @@ app.use('/', express.static(__dirname + '/public'));
 //  });
 
 app.use('/api/products/', productRouter);
+app.use('/api/cart/', cartRouter);
 
 
 
